@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lightBlue">#ADD8E6</color>
+    <color name="progress_green">#21B510</color>
+    <color name="progress_red">#C11515</color>
+    <color name="progress_background">#CEB7B7</color>
+    <color name="mainTheme">#CBAA84</color>
+    <color name="mainBackgroundTheme">#EEEEEE</color>
+    <color name="tabLayoutTheme">#DFBB91</color>
+</resources>

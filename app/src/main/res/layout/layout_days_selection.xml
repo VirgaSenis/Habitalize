@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:id="@+id/layout_days_selection">
+
+        <TextView
+            android:id="@+id/selection_sunday"
+            style="@style/daySelectionStyle"
+            android:text="Sun" />
+
+        <TextView
+            android:id="@+id/selection_monday"
+            style="@style/daySelectionStyle"
+            android:text="Mon" />
+
+        <TextView
+            android:id="@+id/selection_tuesday"
+            style="@style/daySelectionStyle"
+            android:text="Tue" />
+
+        <TextView
+            android:id="@+id/selection_wednesday"
+            style="@style/daySelectionStyle"
+            android:text="Wed" />
+
+        <TextView
+            android:id="@+id/selection_thursday"
+            style="@style/daySelectionStyle"
+            android:text="Thu" />
+
+        <TextView
+            android:id="@+id/selection_friday"
+            style="@style/daySelectionStyle"
+            android:text="Fri" />
+
+        <TextView
+            android:id="@+id/selection_saturday"
+            style="@style/daySelectionStyle"
+            android:text="Sat" />
+
+</LinearLayout>

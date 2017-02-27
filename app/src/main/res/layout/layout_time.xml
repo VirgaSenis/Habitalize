@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="5dp"
+    android:gravity="center"
+    android:focusableInTouchMode="true">
+
+    <EditText
+        android:id="@+id/field_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:text="00"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text=":"/>
+
+    <EditText
+        android:id="@+id/field_minute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:text="00"/>
+
+    <TextView
+        android:id="@+id/view_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:textSize="20sp"
+        android:text="00"/>
+</LinearLayout>
