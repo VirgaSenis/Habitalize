@@ -1,6 +1,8 @@
 package com.iunus.habitualize;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -163,7 +165,8 @@ public class TasksFragment extends Fragment {
         fragment.show(getFragmentManager(), "fragment_timer");
     }
 
-    protected void onTimerDismissed(long duration) {
+    protected void onTimerDismissed(long duration, boolean soundOn, boolean vibrateOn) {
+        alertUser(soundOn, vibrateOn);
         int progress = (int) (duration / MILLIS_IN_MIN);
         Task task = tasks.get(clickedItemIdx);
         int oldProgress = task.getProgress();
@@ -174,6 +177,18 @@ public class TasksFragment extends Fragment {
         notifyChangeToSibling();
 
         Toast.makeText(context, "Progress Saved", Toast.LENGTH_LONG).show();
+    }
+
+    private void alertUser(boolean soundOn, boolean vibrateOn) {
+        if (soundOn) {
+            MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.ringtone);
+            mp.start();
+        }
+
+        if (vibrateOn) {
+            Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(new long[]{0, 1000, 1000, 1000}, 3);  // {delay, sound, delay, sound}
+        }
     }
 
     private void notifyChangeToSibling() {

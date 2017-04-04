@@ -55,9 +55,7 @@ public class TimerDialogFragment extends DialogFragment {
     private boolean soundOn;
 
     public static TimerDialogFragment newInstance() {
-        TimerDialogFragment fragment = new TimerDialogFragment();
-
-        return fragment;
+        return new TimerDialogFragment();
     }
 
     @Override
@@ -73,7 +71,7 @@ public class TimerDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_timer_dialog, container, false);
         
-        getDialog().setTitle("Set Timer");
+        getDialog().setTitle("Timer");
         getDialog().setCanceledOnTouchOutside(false);
 
         getActivity().setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -164,7 +162,7 @@ public class TimerDialogFragment extends DialogFragment {
                 if (value > 100) {  // Text before had two non-zero digits
                     field.setText(String.format(Locale.ENGLISH, "0%s", s.toString().substring(2)));
                 } else if (value > maxValue) {
-                    field.setText(R.string.value_minutes_max);
+                    field.setText(String.format(Locale.ENGLISH, "%d", maxValue));
                 } else {
                     field.setText(s.toString().substring(1));
                 }
@@ -252,13 +250,8 @@ public class TimerDialogFragment extends DialogFragment {
 
             @Override
             public void onFinish() {
-                secondsText.setText(R.string.value_time_min);
-                alertUser();
                 updateTaskProgress();
-                resetTimeViews();
-                toggleFieldFocusable(true);
-                pButton.setText(R.string.start);
-                nButton.setText(R.string.cancel);
+                dismissAllowingStateLoss();
             }
         };
 
@@ -267,18 +260,6 @@ public class TimerDialogFragment extends DialogFragment {
 
     private void stopTimer() {
         timer.cancel();
-    }
-
-    private void alertUser() {
-        if (soundOn) {
-            MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.ringtone);
-            mp.start();
-        }
-
-        if (vibrateOn) {
-            Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-            v.vibrate(new long[]{0, 1000, 1000, 1000}, 3);
-        }
     }
 
     private void toggleFieldFocusable(boolean isFocusable) {
@@ -299,19 +280,19 @@ public class TimerDialogFragment extends DialogFragment {
 
     private void updateTaskProgress() {
         TasksFragment fragment = (TasksFragment) getTargetFragment();
-        fragment.onTimerDismissed(duration);
+        fragment.onTimerDismissed(duration, soundOn, vibrateOn);
     }
 
     private long getDurationInMillis() {
-        return  Utility.editTextToInt(hoursField) * MILLIS_IN_HOUR +
-                Utility.editTextToInt(minutesField) * MILLIS_IN_MINUTE +
-                Utility.textViewToInt(secondsText) * MILLIS_IN_SECOND;
+        return Utility.editTextToInt(hoursField) * MILLIS_IN_HOUR +
+               Utility.editTextToInt(minutesField) * MILLIS_IN_MINUTE +
+               Utility.textViewToInt(secondsText) * MILLIS_IN_SECOND;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getActivity().setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
 }
